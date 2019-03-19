@@ -6,7 +6,7 @@ using namespace std;
 
 vetor::vetor(int t)
 {
-	Size = t;
+	size = t;
 	double *V = new double(t);
 }
 
@@ -19,7 +19,7 @@ vetor::~vetor()
 void vetor::print()
 {
 	cout << "=[";
-	for (int i = 0; i < Size; i++)
+	for (int i = 0; i < size; i++)
 	{
 		cout << *(V + i) << " ";
 	}
@@ -39,20 +39,16 @@ double* vetor::getV()
 
 
 
-int vetor::getsize()
-{
-	return Size;
-}
 
 
 //Sobrecarga do igual
 void vetor::operator =(const vetor &A) //const
 {
 
-	this->Size = A.Size;
+	this->size = A.size;
 
-	double* vetor1 = new double[A.Size];
-	for (int i = 0; i < A.Size; i++)
+	double* vetor1 = new double[A.size];
+	for (int i = 0; i < A.size; i++)
 	{
 		*(vetor1 + i) = *(A.V + i);
 	}
@@ -70,9 +66,9 @@ void vetor::operator =(const vetor &A) //const
 //Construtor de copia
 vetor::vetor(const vetor &A)
 {
-	this->Size = A.Size;
-	double* c = new double[A.Size];
-	for (int i = 0; i < A.Size; i++)
+	this->size = A.size;
+	double* c = new double[A.size];
+	for (int i = 0; i < A.size; i++)
 	{
 		*(c + i) = A.V[i];
 	}
@@ -80,11 +76,11 @@ vetor::vetor(const vetor &A)
 }
 
 vetor vetor::operator + (vetor &A) {
-	if (A.Size == this->Size) {
-		vetor C(A.Size);
-		double* c = new double[A.Size];
+	if (A.size == this->size) {
+		vetor C(A.size);
+		double* c = new double[A.size];
 
-		for (int i = 0; i < A.Size; i++)
+		for (int i = 0; i < A.size; i++)
 		{
 			*(c + i) = this->V[i] + A.V[i];
 		}
@@ -99,11 +95,11 @@ vetor vetor::operator + (vetor &A) {
 }
 
 vetor vetor::operator - (vetor &A) {
-	if (A.Size == this->Size) {
-		vetor C(A.Size);
-		double* c = new double[A.Size];
+	if (A.size == this->size) {
+		vetor C(A.size);
+		double* c = new double[A.size];
 
-		for (int i = 0; i < A.Size; i++)
+		for (int i = 0; i < A.size; i++)
 		{
 			*(c + i) = this->V[i] - A.V[i];
 		}
@@ -118,10 +114,10 @@ vetor vetor::operator - (vetor &A) {
 }
 
 double vetor::operator *(vetor &B) {
-	if (this->Size == B.Size)
+	if (this->size == B.size)
 	{
 		double p = 0;
-		for (int i = 0; i < B.Size; i++)
+		for (int i = 0; i < B.size; i++)
 		{
 			p += this->V[i] * B.V[i];
 		}
@@ -135,7 +131,7 @@ double vetor::operator *(vetor &B) {
 
 vetor vetor::cross(vetor &B)
 {
-	if (this->Size == B.Size & B.Size == 3)
+	if (this->size == B.size & B.size == 3)
 	{
 		vetor C(3);
 		double*c = new double[3];
@@ -156,9 +152,9 @@ vetor vetor::cross(vetor &B)
 
 vetor vetor::operator *(double n)
 {
-	vetor C(this->Size);
-	double* c = new double[this->Size];
-	for (int i = 0; i < this->Size; i++)
+	vetor C(this->size);
+	double* c = new double[this->size];
+	for (int i = 0; i < this->size; i++)
 	{
 		c[i] = n * this->V[i];
 	}
@@ -167,32 +163,3 @@ vetor vetor::operator *(double n)
 }
 
 
-/*
-vetor vetor::operator *(matriz &A)
-{
-	if (Size == A.getsize()[0])
-	{
-		double* v = new double[A.getsize()[1]];
-
-			for (int j = 0; j < A.getsize()[1]; j++)
-			{
-				*(v + j) = 0;
-				for (int k = 0; k < Size; k++)
-				{
-
-					*(v + j) += this->V[k] * A.getM()[k][j];
-				}
-
-			}
-			vetor V;
-			V.setV(v);
-			return V;
-	}
-	else
-	{
-		std::cerr << "Os requisitos para a multiplicacao nao foram cumpridos\n";
-	}
-
-
-}
-*/

@@ -11,7 +11,6 @@ public:
 
 	void setV(double* A);
 	double* getV();
-	int getsize();
 	void print();
 
 
@@ -22,10 +21,8 @@ public:
 	vetor operator - (vetor &);
 	double operator *(vetor &);
 	vetor operator *(double);
-	//vetor operator *(matriz &A);
-
-private:
-	int Size;
+	
+	int size;
 	double *V;
 
 
