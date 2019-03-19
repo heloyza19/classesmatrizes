@@ -259,7 +259,7 @@ matriz matriz::operator *(double n)
 
 		if (this->size[1] == 1)      //numero de colunas em A == numero de linhas em B
 		{
-			matriz P(this->size[0], B.getsize());
+			matriz P(this->size[0], B.size);
 
 			
 
@@ -268,10 +268,10 @@ matriz matriz::operator *(double n)
 			{
 				
 
-				for (int j = 0; j < B.getsize(); j++)    //colunas da nova matriz
+				for (int j = 0; j < B.size; j++)    //colunas da nova matriz
 				{
 				
-				P.M[i][j] = this->M[i][0] * B.getV()[j];
+				P.M[i][j] = this->M[i][0] * B.V[j];
 						
 					
 				}

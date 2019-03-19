@@ -1,2 +1,8 @@
-﻿  classes.cpp
+﻿  matriz.cpp
+c:\users\heloyza\documents\github\dinamica-2d-cpp\classesmatrizes\classes\classes\matriz.cpp(158): warning C4554: '&': verifique a precedência de operador para possível erro; use parênteses para esclarecer a precedência
+c:\users\heloyza\documents\github\dinamica-2d-cpp\classesmatrizes\classes\classes\matriz.cpp(184): warning C4554: '&': verifique a precedência de operador para possível erro; use parênteses para esclarecer a precedência
+c:\users\heloyza\documents\github\dinamica-2d-cpp\classesmatrizes\classes\classes\matriz.cpp(205): warning C4715: 'matriz::operator-': nem todos os caminhos de controle retornam um valor
+c:\users\heloyza\documents\github\dinamica-2d-cpp\classesmatrizes\classes\classes\matriz.cpp(236): warning C4715: 'matriz::operator*': nem todos os caminhos de controle retornam um valor
+c:\users\heloyza\documents\github\dinamica-2d-cpp\classesmatrizes\classes\classes\matriz.cpp(179): warning C4715: 'matriz::operator+': nem todos os caminhos de controle retornam um valor
+c:\users\heloyza\documents\github\dinamica-2d-cpp\classesmatrizes\classes\classes\matriz.cpp(286): warning C4715: 'matriz::operator*': nem todos os caminhos de controle retornam um valor
   classes.vcxproj -> C:\Users\Heloyza\Documents\GitHub\Dinamica-2D-cpp\classesmatrizes\classes\Debug\classes.exe
