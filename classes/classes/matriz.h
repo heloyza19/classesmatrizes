@@ -3,16 +3,17 @@
 
 class matriz
 {
-private:	
-	double **M;
+
 public:
 	int size[2];
+	double **M;
+
 	matriz(int m, int n);
 	matriz(const matriz &);
 
 
 	void setM(double ** M1);
-	int* getsize();
+
 	double** getM();
 	void print();
 

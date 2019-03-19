@@ -1,8 +1,8 @@
-// classes.cpp : Este arquivo contém a função 'main'. A execução do programa começa e termina ali.
-//
+
 
 #include "pch.h"
 #include <iostream>
+
 #include "matriz.h"
 #include "vetor.h"
 
@@ -96,18 +96,19 @@ int main() {
 	Mat3.ones();
 	Mat3.print();
 
-	matriz Mat4(3, 5);
-	Mat4.zeros();
-	Mat4.print();
+	matriz Matz(3, 5);
+	Matz.zeros();
+	Matz.print();
 	
+
 
 	//Matriz * Vetor
 	cout << "Matriz 1 * U=";
 	matriz R = Mat * U;
 	R.print();
 
-	cout << "Matriz 2 * Matriz 1=";
-	matriz R1 = Mat2 * Mat;
+	cout << "Matriz 1 * Matriz 2=";
+	matriz R1 = Mat * Mat2;
 	R1.print();
 
 	matriz Mats(L, C);
@@ -119,10 +120,10 @@ int main() {
 	cout << "Matriz 1 + Matriz 2 + Mat3 =";
 	Mats2.print();
 
-	matriz Matsub(L,C);
-	Matsub = Mat - Mat2;
+	matriz Mat4(L, C);
+	Mat4 = Mat - Mat2;
 	cout << "Matriz 1 - Matriz 2 =";
-	Matsub.print();
+	Mat4.print();
 
 	matriz Mat5 = Mat * Mat2;
 	cout << "Matriz 1 * Matriz 2 =";
@@ -137,3 +138,4 @@ int main() {
 
 	return 0;
 }
+

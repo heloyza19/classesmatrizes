@@ -15,10 +15,7 @@ matriz::matriz(int l, int c)
 }
 
 
-int* matriz::getsize() 
-{
-	return size;
-}
+
 
 
 void matriz::setM(double** M1)
@@ -49,23 +46,23 @@ void matriz::eye()
 {
 	if(size[0]==size[1])
 	{
-		double** m = new double*[size[0]];
+		//double** m = new double*[size[0]];
 		for (int i = 0; i < size[0]; i++)
 		{
-			m[i] = new double[size[0]];
+			//m[i] = new double[size[0]];
 			for (int j = 0; j < size[0]; j++)
 			{
 				if (i == j) {
-					*(*(m + i) + j) = 1;
+					this->M[i][j] = 1;
 				}
 				else {
-					*(*(m + i) + j) = 0;
+					this->M[i][j]= 0;
 				}
 
 			
 			}
 		}
-		this->setM(m);
+		//this->setM(m);
 		}
 	else {
 		std::cerr << "A matriz nao e quadrada\n";
@@ -75,33 +72,33 @@ void matriz::eye()
 
 void matriz::ones()
 {
-	double** m = new double*[size[0]];
+	//double** m = new double*[size[0]];
 	for (int i = 0; i < size[0]; i++)
 	{
-		m[i] = new double[size[1]];
+		//m[i] = new double[size[1]];
 		for (int j = 0; j < size[1]; j++)
 		{
 			
-		*(*(m + i) + j) = 1;
+		 this->M [i][j] = 1;
 		}
 	}
-	this->setM(m);
+	//this->setM(m);
 
 }
 
 
 void matriz::zeros() {
-	double** m = new double*[size[0]];
+	//double** m = new double*[size[0]];
 	for (int i = 0; i < size[0]; i++)
 	{
-		m[i] = new double[size[1]];
+		//m[i] = new double[size[1]];
 		for (int j = 0; j < size[1]; j++)
 		{
 
-			*(*(m + i) + j) = 0;
+			this->M[i][j]= 0;
 		}
 	}
-	this->setM(m);
+	//this->setM(m);
 
 }
 
@@ -114,10 +111,9 @@ void matriz::operator =(const matriz &A) //const
 	this->size[0] = A.size[0];
 	this->size[1] = A.size[1];
 
-	double** matriz1 = new double*[A.size[0]];
 	for (int i = 0; i < A.size[0]; i++)
 	{
-		*(matriz1 + i) = new double[A.size[1]];
+		
 	}
 
 	for (int i = 0; i < A.size[0]; i++)
@@ -125,12 +121,12 @@ void matriz::operator =(const matriz &A) //const
 		for (int j = 0; j < A.size[1]; j++) 
 		{
 
-			*(*(matriz1 + i) + j) = *(*(A.M + i) + j);
+			this->M[i][j] = *(*(A.M + i) + j);
 
 		}
 	}
 
-	this->setM(matriz1);
+	//this->setM(matriz1);
 }
 
 
@@ -143,14 +139,14 @@ matriz::matriz(const matriz &A)
 	double** m = new double*[A.size[0]];
 	for (int i = 0; i < A.size[0]; i++)
 	{
-		m[i] = new double[A.size[1]];
+		*(m + i) = new double[A.size[1]];
 	}
 
 	for (int i = 0; i < A.size[0]; i++)
 	{
 		for (int j = 0; j < A.size[1]; j++) 
 		{
-			m[i][j] = A.M[i][j];
+			*(*(m + i) + j) = A.M[i][j];
 		}
 	}
 	this->setM(m);
@@ -162,18 +158,18 @@ matriz matriz::operator + (matriz &A)
 	if (A.size[0] == this->size[0] & A.size[1] == this->size[1])
 	{
 		matriz C(A.size[0], A.size[1]);
-		double** c = new double*[A.size[0]];
+	
 
 		for (int i = 0; i < A.size[0]; i++)
 		{
-			c[i] = new double[A.size[1]];
+			
 			for (int j = 0; j < A.size[1]; j++)
 			{
 
-				*(*(c + i) + j) = this->M[i][j] + A.M[i][j];
+				C.M[i][j] = this->M[i][j] + A.M[i][j];
 			}
 		}
-		C.setM(c);
+	
 		return C;
 	}
 	else
@@ -188,19 +184,18 @@ matriz matriz::operator - (matriz &A)
 	if (A.size[0] == this->size[0] & A.size[1] == this->size[1])
 	{
 		matriz C(A.size[0], A.size[1]);
-		double** c = new double*[A.size[0]];
+		
 
 		for (int i = 0; i < A.size[0]; i++)
 		{
-			c[i] = new double[A.size[1]];
 
 			for (int j = 0; j < A.size[1]; j++)
 			{
 
-				*(*(c + i) + j) = this->M[i][j] - A.M[i][j];
+				C.M[i][j] = this->M[i][j] - A.M[i][j];
 			}
 		}
-		C.setM(c);
+		
 		return C;
 	}
 	else 
@@ -215,23 +210,23 @@ matriz matriz::operator * (matriz &B)
 	{
 		matriz P(this->size[0], B.size[1]);
 
-		double** p = new double*[this->size[0]];
+	
 
 
 		for (int i = 0; i < this->size[0]; i++)  //tamanho das linhas da nova matriz
 		{
-			p[i] = new double[B.size[1]];
+			
 
 			for (int j = 0; j < B.size[1]; j++)    //colunas da nova matriz
 			{
-				*(*(p + i) + j) = 0;
+				P.M[i][j]= 0;
 				for (int k = 0; k < this->size[1]; k++)   //linhas da matriz antiga
 				{
-					*(*(p + i) + j) += this->M[i][k] * B.M[k][j];
+					P.M[i][j] += this->M[i][k] * B.M[k][j];
 				}
 			}
 		}
-		P.setM(p);
+		
 		return P;
 	}
 	else 
@@ -242,20 +237,20 @@ matriz matriz::operator * (matriz &B)
 
 matriz matriz::operator *(double n)
 {
-	double** p = new double*[this->size[0]];
+	
 
-	matriz M(this->size[0], this->size[1]);
+	matriz M1(this->size[0], this->size[1]);
 
 	for (int i = 0; i < this->size[0]; i++)
 	{
-		p[i] = new double[this->size[1]];
+		
 		for (int j = 0; j < this->size[1]; j++)
 		{
-			*(*(p + i) + j) = n * this->M[i][j];
+			M1.M[i][j] = n * this->M[i][j];
 		}
 	}
-	M.setM(p);
-	return M;
+	
+	return M1;
 }
 
 	
@@ -264,24 +259,24 @@ matriz matriz::operator *(double n)
 
 		if (this->size[1] == 1)      //numero de colunas em A == numero de linhas em B
 		{
-			matriz P(this->size[0], B.size);
+			matriz P(this->size[0], B.getsize());
 
-			double** p = new double*[this->size[0]];
+			
 
 
 			for (int i = 0; i < this->size[0]; i++)  //tamanho das linhas da nova matriz
 			{
-				p[i] = new double[B.size];
+				
 
-				for (int j = 0; j < B.size; j++)    //colunas da nova matriz
+				for (int j = 0; j < B.getsize(); j++)    //colunas da nova matriz
 				{
 				
-				*(*(p + i) + j) = this->M[i][0] * B.getV()[j];
+				P.M[i][j] = this->M[i][0] * B.getV()[j];
 						
 					
 				}
 			}
-			P.setM(p);
+			
 			return P;
 		}
 		else

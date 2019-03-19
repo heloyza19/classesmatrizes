@@ -1,13 +1,12 @@
 ﻿#include "pch.h"
 #include "vetor.h"
 #include <iostream>
-#include <math.h>
 
 using namespace std;
 
 vetor::vetor(int t)
 {
-	size = t;
+	Size = t;
 	double *V = new double(t);
 }
 
@@ -20,7 +19,7 @@ vetor::~vetor()
 void vetor::print()
 {
 	cout << "=[";
-	for (int i = 0; i < size; i++)
+	for (int i = 0; i < Size; i++)
 	{
 		cout << *(V + i) << " ";
 	}
@@ -40,50 +39,20 @@ double* vetor::getV()
 
 
 
-double vetor::norm()
+int vetor::getsize()
 {
-	double norma = 0;
-	for (int i = 0; i < size; i++)
-	{
-		norma += pow(V[i], 2);
-	}
-
-	return sqrt(norma);
-
+	return Size;
 }
 
-void vetor::zeros()
-{
-	double* v = new double[size];
-	for (int i = 0; i < size; i++)
-	{
-		v[i] = 0;
-
-	}
-	this->setV(v);
-
-}
-
-void vetor::ones()
-{
-	double* v = new double[size];
-	for (int i = 0; i < size; i++)
-	{
-		v[i] = 1;
-
-	}
-	this->setV(v);
-
-}
 
 //Sobrecarga do igual
 void vetor::operator =(const vetor &A) //const
 {
 
-	this->size = A.size;
+	this->Size = A.Size;
 
-	double* vetor1 = new double[A.size];
-	for (int i = 0; i < A.size; i++)
+	double* vetor1 = new double[A.Size];
+	for (int i = 0; i < A.Size; i++)
 	{
 		*(vetor1 + i) = *(A.V + i);
 	}
@@ -101,45 +70,40 @@ void vetor::operator =(const vetor &A) //const
 //Construtor de copia
 vetor::vetor(const vetor &A)
 {
-	this->size = A.size;
-	double* c = new double[A.size];
-	for (int i = 0; i < A.size; i++)
+	this->Size = A.Size;
+	double* c = new double[A.Size];
+	for (int i = 0; i < A.Size; i++)
 	{
 		*(c + i) = A.V[i];
 	}
 	this->setV(c);
 }
 
-vetor vetor::operator + (vetor &A) 
-{
-	if (A.size == this->size) 
-	{
-		vetor C(A.size);
-		double* c = new double[A.size];
+vetor vetor::operator + (vetor &A) {
+	if (A.Size == this->Size) {
+		vetor C(A.Size);
+		double* c = new double[A.Size];
 
-		for (int i = 0; i < A.size; i++)
+		for (int i = 0; i < A.Size; i++)
 		{
-			c[i] = this->V[i] + A.V[i];
+			*(c + i) = this->V[i] + A.V[i];
 		}
 
 		C.setV(c);
 
 		return C;
 	}
-	else 
-	{
+	else {
 		cerr << "vetores com tamanhos diferentes\n";
 	}
 }
 
-vetor vetor::operator - (vetor &A) 
-{
-	if (A.size == this->size) 
-	{
-		vetor C(A.size);
-		double* c = new double[A.size];
+vetor vetor::operator - (vetor &A) {
+	if (A.Size == this->Size) {
+		vetor C(A.Size);
+		double* c = new double[A.Size];
 
-		for (int i = 0; i < A.size; i++)
+		for (int i = 0; i < A.Size; i++)
 		{
 			*(c + i) = this->V[i] - A.V[i];
 		}
@@ -148,25 +112,22 @@ vetor vetor::operator - (vetor &A)
 
 		return C;
 	}
-	else
-	{
+	else {
 		cerr << "vetores com tamanhos diferentes\n";
 	}
 }
 
-double vetor::operator *(vetor &B) 
-{
-	if (this->size == B.size)
+double vetor::operator *(vetor &B) {
+	if (this->Size == B.Size)
 	{
 		double p = 0;
-		for (int i = 0; i < B.size; i++)
+		for (int i = 0; i < B.Size; i++)
 		{
 			p += this->V[i] * B.V[i];
 		}
 		return p;
 	}
-	else 
-	{
+	else {
 		cerr << "Vetores com tamanhos diferentes\n";
 	}
 
@@ -174,7 +135,7 @@ double vetor::operator *(vetor &B)
 
 vetor vetor::cross(vetor &B)
 {
-	if (this->size == B.size & B.size == 3)
+	if (this->Size == B.Size & B.Size == 3)
 	{
 		vetor C(3);
 		double*c = new double[3];
@@ -195,9 +156,9 @@ vetor vetor::cross(vetor &B)
 
 vetor vetor::operator *(double n)
 {
-	vetor C(this->size);
-	double* c = new double[this->size];
-	for (int i = 0; i < this->size; i++)
+	vetor C(this->Size);
+	double* c = new double[this->Size];
+	for (int i = 0; i < this->Size; i++)
 	{
 		c[i] = n * this->V[i];
 	}
